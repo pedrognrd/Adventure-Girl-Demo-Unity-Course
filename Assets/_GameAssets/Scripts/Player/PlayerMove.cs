@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     private float y;
     Rigidbody2D rigidBody;
     Animator animator;
+    private bool canShoot;
 
     private void Awake()
     {
@@ -39,6 +40,15 @@ public class PlayerMove : MonoBehaviour
         {
             animator.SetBool("Jumping", false);
         }
+
+        if (Mathf.Abs(rigidBody.velocity.x) != 0 || Mathf.Abs(rigidBody.velocity.y) != 0f)
+        {
+            GameObject.Find("Player").GetComponent<PlayerAttack>().canShoot = false;
+        }
+        else 
+        {
+            GameObject.Find("Player").GetComponent<PlayerAttack>().canShoot = true;
+        }
     }
 
     void Displace()
@@ -48,13 +58,10 @@ public class PlayerMove : MonoBehaviour
         if (Mathf.Abs(rigidBody.velocity.x) > 0)
         {
             animator.SetBool("Running", true);
-            //running = true;
-            
         }
         else
         {
             animator.SetBool("Running", false);
-            //running = false;
         }
     }
 
@@ -64,6 +71,7 @@ public class PlayerMove : MonoBehaviour
         {
             rigidBody.AddForce(Vector2.up * forceJump, ForceMode2D.Impulse);
             animator.SetBool("Jumping", true);
+            GameObject.Find("Player").GetComponent<PlayerAttack>().canShoot = false;
         }
     }
 }
