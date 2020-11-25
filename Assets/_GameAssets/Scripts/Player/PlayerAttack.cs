@@ -5,17 +5,17 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     Animator animator;
-    [Header("Prefab del proyectil")]
+    [Header("Projectile Prefab")]
     public GameObject prefabProjectile;
-    [Header("Punto de lanzamiento")]
+    [Header("Spawner Point")]
     public Transform spawnPoint;
     public float verticalForce = 100;
-    [Header("Fuerza horizontal")]
+    [Header("Horizontal Force")]
     [Range(0, 2000)]
     public float horizontalForce;
 
     /// <summary>
-    /// Determina si se puede disparar o no.
+    /// Defines if shooting is able or not
     /// </summary>
     public bool canShoot = true;
 
@@ -55,5 +55,4 @@ public class PlayerAttack : MonoBehaviour
     {
         canShoot = true;
     }
-
 }

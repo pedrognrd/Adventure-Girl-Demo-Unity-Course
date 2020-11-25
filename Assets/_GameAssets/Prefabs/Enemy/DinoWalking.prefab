@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4861313647434331138}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: initPos
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
@@ -162,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ca06e794f54a241918b29d09f83697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dying: 0
 --- !u!1 &4861313648331384693
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4861313648331384700}
   - component: {fileID: 4861313648331384694}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: DinoWalking
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -222,7 +223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4861313649193639418}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: endPos
   m_TagString: Untagged
   m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
