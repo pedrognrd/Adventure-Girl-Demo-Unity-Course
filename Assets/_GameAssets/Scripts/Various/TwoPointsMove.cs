@@ -9,7 +9,7 @@ public class TwoPointsMove : MonoBehaviour
     public Transform endPos;
     public GameObject objectToMove;
     private Vector2 newPosition;
-    public float pct = 0f;//Porcentaje de desplazamiento
+    private float pct = 0f;//Porcentaje de desplazamiento
     public bool rotate; 
     public float speed;
     

@@ -147,9 +147,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.6180515, y: 0.3560133}
+  m_Offset: {x: -0.34617162, y: 0.021392345}
   serializedVersion: 2
-  m_Radius: 1.3006411
+  m_Radius: 0.6732261
 --- !u!114 &1588737650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,8 +212,8 @@ MonoBehaviour:
   initPos: {fileID: 4861313647434331138}
   endPos: {fileID: 4861313649193639418}
   objectToMove: {fileID: 4861313647781163669}
-  speed: 0.4
   rotate: 1
+  speed: 0.4
 --- !u!1 &4861313649193639417
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,12 +9,13 @@ public class Bullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            collision.GetComponent<Enemy>().dying = true; 
             collision.GetComponent<Animator>().SetTrigger("Dying");
-            collision.GetComponent<Enemy>().dying = true;
+            
         }
         if (collision.CompareTag("Player") == false)
         {
-            //Sólo se destruye si no "hacer trigger" contra el player
+            // Bullet is destroy only if trigger is not the Player
             Destroy(gameObject);
         }
     }

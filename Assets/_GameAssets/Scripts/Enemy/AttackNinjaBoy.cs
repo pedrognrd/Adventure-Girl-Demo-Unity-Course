@@ -36,10 +36,12 @@ public class AttackNinjaBoy : MonoBehaviour
     {
         xEnemy = gameObject.transform.position.x;
         xPlayer = player.transform.position.x;
-
-
-        if ((xEnemy - xPlayer) < attackDistance)
+ 
+        // Ninja Boy only attacks when Player is in line with him, but not if player is lower or higher.
+        if ((xEnemy - xPlayer) < attackDistance && (player.transform.position.y - gameObject.transform.position.y) < 1)
         {
+            // Detects if player is left or right from Ninja Boy
+            DetectPayer();
             GetComponentInParent<TwoPointsMove>().enabled = false;
             animator.SetBool("Throwing", true);
             Throw();
@@ -48,9 +50,25 @@ public class AttackNinjaBoy : MonoBehaviour
             GetComponentInParent<TwoPointsMove>().enabled = true;
             animator.SetBool("Throwing", false);
         }
+
+        if (gameObject.GetComponent<Enemy>().dying) {
+            animator.SetBool("Throwing", false);
+        }
     }
 
-    public void Throw()
+    private void DetectPayer() 
+    {
+        if (xEnemy - xPlayer > 0)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (xEnemy - xPlayer < 0)
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+    }
+
+    private void Throw()
     {
         if (canShoot)
         {
@@ -58,7 +76,7 @@ public class AttackNinjaBoy : MonoBehaviour
             GameObject projectile = Instantiate(prefabProjectile, spawnPoint.position, spawnPoint.rotation);
             projectile.GetComponent<Rigidbody2D>().AddForce(new Vector2(horizontalForce * direction, verticalForce));
             canShoot = false;
-            Invoke(nameof(RestoreThrow), 1);
+            Invoke(nameof(RestoreThrow), 0.9f);
             //GetComponentInParent<PlayerSoundManager>().PlayAudioFire();
         }
     }

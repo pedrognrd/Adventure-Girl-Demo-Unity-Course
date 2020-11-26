@@ -1,0 +1,8 @@
+TODO
+- Construir HUD del player
+- Sonidos al disparar tanto de Player como de Ninja Boy
+
+
+DONE
+- Orientar a Ninja Boy hacia el player
+- Controlar que al disparar a los enemigos para que se active la animación Dying

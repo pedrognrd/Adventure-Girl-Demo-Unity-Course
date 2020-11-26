@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
             // TODO
             //collision.gameObject.GetComponent<PlayerReaction>().JumpBack();
             //collision.gameObject.GetComponent<PlayerManager>().RecibirDanyo();
+            dying = true;
             animator.SetTrigger("Dying");
             Invoke(nameof(Dying), 0.6f);
         }

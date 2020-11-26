@@ -13,10 +13,12 @@ public class PlayerOrientation : MonoBehaviour
         if (x > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
+            GameObject.Find("Player").GetComponent<PlayerAttack>().prefabProjectile.transform.localScale = new Vector3(1, 1, 1);
         }
         else if (x < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
+            GameObject.Find("Player").GetComponent<PlayerAttack>().prefabProjectile.transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 }

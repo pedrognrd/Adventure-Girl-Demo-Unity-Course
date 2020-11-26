@@ -135,7 +135,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: db2b18c637d464448914d8da11280762, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -179,9 +179,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02887857, y: 0}
+  m_Offset: {x: 0.02887857, y: 0.04182774}
   serializedVersion: 2
-  m_Radius: 1.0806917
+  m_Radius: 0.78789884
 --- !u!114 &6323350110566208239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a741b650dde87f648b94b427abead443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 10
+  attackDistance: 5
   horizontalForce: 800
   verticalForce: 100
   prefabProjectile: {fileID: 8603242044797586004, guid: cd8e3f43cea2dc24381ab4fdf8576a4f, type: 3}
@@ -381,14 +381,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8016867104237762805}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8898872ffd4afd4ea759df5d3192c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initPos: {fileID: 8016867102326319434}
-  endPos: {fileID: 8016867102768975082}
+  initPos: {fileID: 0}
+  endPos: {fileID: 0}
   objectToMove: {fileID: 8016867102820912839}
-  pct: 0
   rotate: 1
   speed: 0.4
