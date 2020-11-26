@@ -1,8 +1,14 @@
 TODO
-- Construir HUD del player
+- Mobile controls
+	- Scripts for buttons and joystick
+- Enemy attack affects player
+	- Decrease lifes
+
+- GameManager
+
 - Sonidos al disparar tanto de Player como de Ninja Boy
 
-
 DONE
-- Orientar a Ninja Boy hacia el player
+- Construir HUD del player
 - Controlar que al disparar a los enemigos para que se active la animación Dying
+- Orientar a Ninja Boy hacia el player
