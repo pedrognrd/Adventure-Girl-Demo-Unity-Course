@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static bool continueGame = false;
     // Capture player object reference
     private GameObject player;
-    
+    private const int TIME_TO_RELOAD = 2;
 
     [Header("GAME STATE")]
     // Current State of the game
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     [Header("HUD CONFIG")]
     //UI
-    public GameObject prefabLifeImage;
+    public GameObject prefabImageLife;
     private GameObject panelLifes;
     private Text textScore;
     private GameObject textGameOver;
@@ -44,6 +44,9 @@ public class GameManager : MonoBehaviour
     public int score;
     public int lifesNumber;
     public int maxLifesNumber;
+
+    [SerializeField]
+    private bool useVJoystick;
 
     private void Awake()
     {
@@ -60,15 +63,15 @@ public class GameManager : MonoBehaviour
         textScore.text = score.ToString();
         lifesNumber = maxLifesNumber;
 
-        //GetComponent<UIManager>().CrearVidasUI(numeroVidas, prefabImagenVida, panelVidas);
-        /*if (UseVJoystick())
+        GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
+        if (UsingVJoystick())
         {
-            mobileControls.SetActive(true);
+            controlsMobile.SetActive(true);
         }
         else
         {
-            mobileControls.SetActive(false);
-        }*/
+            controlsMobile.SetActive(false);
+        }
     }
 
     public void RecoverState()
@@ -79,7 +82,7 @@ public class GameManager : MonoBehaviour
             score = PlayerPrefs.GetInt("Score");
             if (PlayerPrefs.GetInt("HasKey") == 1)
             {
-               // RecogerLlave();
+                KeyTaken();
             }
             player.transform.position = new Vector2(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"));
         }
@@ -88,7 +91,46 @@ public class GameManager : MonoBehaviour
     public void KeyTaken()
     {
         hasKey = true;
-        //GetComponent<UIManager>().ActivarLlaveUI();
+        GetComponent<UIManager>().ActivateUIKey();
+    }
+
+    public void DeleteLife()
+    {
+        print("deltelife");
+        if (godMode) return;
+        lifesNumber--;
+        //GameStatusManager.Instance.SetNumeroVidas(numeroVidas);//STATUS DEL JUEGO
+        GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
+        if (lifesNumber == 0)
+        {
+            //GameOver
+            textGameOver.SetActive(true);
+            player.SetActive(false);
+            //Invoke(nameof(LoadIntroScene), TIME_TO_RELOAD);
+        }
+    }
+
+    private void LoadIntroScene()
+    {
+        SceneManager.LoadScene("CoverScene");
+    }
+
+    private bool UsingVJoystick()
+    {
+        bool mobilePlatfomr =
+            ((Application.platform == RuntimePlatform.Android) || (Application.platform == RuntimePlatform.IPhonePlayer));
+        if (mobilePlatfomr)
+        {
+            //En un dispositivo movil
+            useVJoystick = true;
+        }
+        else if (Application.platform != RuntimePlatform.WindowsEditor)
+        {
+            //En el resto
+            useVJoystick = false;
+        }
+        //En el Editor de Unity
+        return useVJoystick;
     }
 
 }

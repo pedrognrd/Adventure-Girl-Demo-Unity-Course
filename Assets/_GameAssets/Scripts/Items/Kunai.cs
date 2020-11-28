@@ -14,9 +14,7 @@ public class Kunai : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //collision.GetComponent<Animator>().SetTrigger("Dying");
-            //collision.GetComponent<Enemy>().dying = true;
-            //StartCoroutine(MyFunction(false, 1f));
+            
         }
         if (collision.CompareTag("Enemy") == false)
         {
