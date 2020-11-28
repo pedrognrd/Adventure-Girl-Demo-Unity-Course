@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     public float speed = 10;
 
     Animator animator;
+    private bool beingFired = false;
     private bool canShoot;
     public FixedJoystick joystickPlayer;
     Rigidbody2D rigidBody;
@@ -68,9 +69,18 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    public void Beingfired()
+    {
+        beingFired = true;
+    }
+
     void Displace()
     {
-        rigidBody.velocity = new Vector2(x * Time.deltaTime * speed, rigidBody.velocity.y);
+        if (!beingFired)
+        {
+            rigidBody.velocity = new Vector2(x * Time.deltaTime * speed, rigidBody.velocity.y);
+        }
+        
 
         if (Mathf.Abs(rigidBody.velocity.x) > 0)
         {

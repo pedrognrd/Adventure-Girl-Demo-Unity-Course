@@ -76,7 +76,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        
+        print("score " + score);
     }
 
     public void DeleteLife()
@@ -96,13 +96,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void KeyTaken()
-    {
-        hasKey = true;
-        GetComponent<UIManager>().ActivateUIKey();
-    }
-
-
     private void LoadIntroScene()
     {
         SceneManager.LoadScene("CoverScene");
@@ -116,10 +109,44 @@ public class GameManager : MonoBehaviour
             score = PlayerPrefs.GetInt("Score");
             if (PlayerPrefs.GetInt("HasKey") == 1)
             {
-                KeyTaken();
+                TakingKey();
             }
             player.transform.position = new Vector2(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"));
         }
+    }
+
+    public void TakingKey()
+    {
+        hasKey = true;
+        GetComponent<UIManager>().ActivateUIKey();
+    }
+
+    public void TakingDiamond(string diamondName)
+    {
+        switch (diamondName)
+        {
+            case "DiamondBlue" :
+                hasDiamondBlue = true;
+                break;
+            case "DiamondGreen":
+                hasDiamondGreen = true;
+                break;
+            case "DiamondRed":
+                hasDiamondRed = true;
+                break;
+            case "DiamondYellow":
+                hasDiamondYellow = true;
+                break;
+        }
+
+        GetComponent<UIManager>().ActivateUIDiamond(diamondName);
+    }
+
+    public void Scoring(int points)
+    {
+        score += points;
+        //GameStatusManager.Instance.SetPuntuacion(puntuacion);//STATUS DEL JUEGO
+        textScore.text = score.ToString();
     }
 
     private bool UsingVJoystick()

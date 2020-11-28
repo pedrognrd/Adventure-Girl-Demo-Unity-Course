@@ -25,12 +25,14 @@ public class Enemy : MonoBehaviour
         {
             // TODO
             //collision.gameObject.GetComponent<PlayerReaction>().JumpBack();
-
             // If enemy is Ninja Boy, he stops attacking before dying
             if (gameObject.layer == 11)
             {
                 gameObject.GetComponent<AttackNinjaBoy>().canShoot = false;
             }
+
+            // Player Jumps back
+            collision.gameObject.GetComponent<JumpBack>().JumpingBack();
             // Inflicts damage to Player
             collision.gameObject.GetComponent<PlayerManager>().DamageReceived();
             dying = true;

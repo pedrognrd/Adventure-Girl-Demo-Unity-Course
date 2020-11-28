@@ -1,12 +1,7 @@
 TODO
-- Enemy attack affects player
-	- Player Jumps back and Gods mode
-	- Stop game
-
-- Enemy colliding player
-	- Player Jumps back and Gods mode
-	- Decrease lifes and kills player
-	- Stop game
+- Player Sound Manager
+- Taking HUD items
+	- Coins and Score
 
 - Install Android JDK
 - Mobile controls
@@ -20,13 +15,23 @@ TODO
 
 STOPPERS
 - When Using Joystick Player does not look at left
+- When Dying Stop game
+- Coins values & score
+	- 1 CoinBronzeMedium = 0.1 CoinGoldMedium
+	- 1 CoinBronzeLarge = 0.5 CoinGoldMedium
+	- 1 CoinGoldLarge = 5 CoinGoldMedium
 
 DONE
+- Taking HUD items
+	- Diamonds
+	- Key
 
 - Enemy colliding player
+	- Player Jumps back and Gods mode
 	- Decrease lifes and kills player
 
 - Enemy attack affects player
+	- Player Jumps back and Gods mode
 	- Stop Shooting
 	- Decrease lifes and kills player
 

@@ -14,6 +14,7 @@ public class Kunai : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<JumpBack>().JumpingBack();
             GameObject.Find("Player").GetComponent<PlayerManager>().DamageReceived();
         }
         if (collision.CompareTag("Enemy") == false)

@@ -30,7 +30,21 @@ public class UIManager : MonoBehaviour
     // The color of the diamond is a parameter
     public void ActivateUIDiamond(string diamondColor)
     {
-        
+        switch (diamondColor)
+        {
+            case "DiamondBlue":
+                imageDiamondBlue.enabled = true;
+                break;
+            case "DiamondGreen":
+                imageDiamondGreen.enabled = true;
+                break;
+            case "DiamondRed":
+                imageDiamondRed.enabled = true;
+                break;
+            case "DiamondYellow":
+                imageDiamondYellow.enabled = true;
+                break;
+        }
     }
 
     private void CleanPanelLives(GameObject panelLifes)
