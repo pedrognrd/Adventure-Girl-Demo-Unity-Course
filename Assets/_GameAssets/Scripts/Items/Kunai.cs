@@ -14,11 +14,11 @@ public class Kunai : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            
+            GameObject.Find("Player").GetComponent<PlayerManager>().DamageReceived();
         }
         if (collision.CompareTag("Enemy") == false)
         {
-            //Sólo se destruye si no "hacer trigger" contra el player
+            // Is only destroyded if impacts agains Player
             Destroy(gameObject);
         }
     }

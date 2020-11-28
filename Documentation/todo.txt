@@ -1,18 +1,36 @@
 TODO
+- Enemy attack affects player
+	- Player Jumps back and Gods mode
+	- Stop game
+
+- Enemy colliding player
+	- Player Jumps back and Gods mode
+	- Decrease lifes and kills player
+	- Stop game
+
 - Install Android JDK
 - Mobile controls
 	- Scripts for buttons and joystick
-- Enemy attack affects player
-	- Decrease lifes
 
 - GameManager
-
 - Sonidos al disparar tanto de Player como de Ninja Boy
 
 - UIManager
 	- ActivateUIDiamond
 
+STOPPERS
+- When Using Joystick Player does not look at left
+
 DONE
-- Construir HUD del player
-- Controlar que al disparar a los enemigos para que se active la animación Dying
-- Orientar a Ninja Boy hacia el player
+
+- Enemy colliding player
+	- Decrease lifes and kills player
+
+- Enemy attack affects player
+	- Stop Shooting
+	- Decrease lifes and kills player
+
+- Build Player's HUD
+- Key Taken works
+- Dying animation on enemies when shooting
+- Ninja Boy looks at player

@@ -4,27 +4,44 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    [Header("PLAYER MOVEMENT")]
     [Range(1, 10)]
     public float forceJump = 1;
-    //private bool running = false;
     [Range(1, 1000)]
     public float speed = 10;
-    private float x;
-    private float y;
-    Rigidbody2D rigidBody;
+
     Animator animator;
     private bool canShoot;
-
+    public FixedJoystick joystickPlayer;
+    Rigidbody2D rigidBody;
+    private float x;
+    private float y;
+    
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
+        // TODO Add Player Sound Manager
+
+        // Detect if we are using Fixed Joystick
+        if (GameObject.Find("Fixed Joystick") != null)
+        {
+            joystickPlayer = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
+        }
     }
 
     private void Update()
     {
-        x = Input.GetAxis("Horizontal");
-        y = Input.GetAxis("Vertical");
+        if (joystickPlayer != null && joystickPlayer.isActiveAndEnabled)
+        {
+            x = joystickPlayer.Horizontal;
+            y = joystickPlayer.Vertical;
+        }
+        else
+        {
+            x = Input.GetAxis("Horizontal");
+            y = Input.GetAxis("Vertical");
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

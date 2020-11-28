@@ -77,6 +77,8 @@ public class AttackNinjaBoy : MonoBehaviour
             projectile.GetComponent<Rigidbody2D>().AddForce(new Vector2(horizontalForce * direction, verticalForce));
             canShoot = false;
             Invoke(nameof(RestoreThrow), 0.9f);
+
+            // TODO
             //GetComponentInParent<PlayerSoundManager>().PlayAudioFire();
         }
     }

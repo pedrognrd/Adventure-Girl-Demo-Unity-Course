@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         // Capture object references
-        panelLifes = GameObject.Find("PanelLIfes");
+        panelLifes = GameObject.Find("PanelLifes");
         textScore = GameObject.Find("TextScore").GetComponent<Text>();
         textGameOver = GameObject.Find("TextGameOver");
         textGameOver.SetActive(false);
@@ -74,6 +74,40 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        
+    }
+
+    public void DeleteLife()
+    {
+        if (godMode) return;
+        lifesNumber--;
+        
+        // TODO
+        //GameStatusManager.Instance.SetNumeroVidas(numeroVidas);//STATUS DEL JUEGO
+        GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
+        if (lifesNumber == 0)
+        {
+            //GameOver
+            textGameOver.SetActive(true);
+            player.SetActive(false);
+            //Invoke(nameof(LoadIntroScene), TIME_TO_RELOAD);
+        }
+    }
+
+    public void KeyTaken()
+    {
+        hasKey = true;
+        GetComponent<UIManager>().ActivateUIKey();
+    }
+
+
+    private void LoadIntroScene()
+    {
+        SceneManager.LoadScene("CoverScene");
+    }
+
     public void RecoverState()
     {
         continueGame = false;
@@ -86,33 +120,6 @@ public class GameManager : MonoBehaviour
             }
             player.transform.position = new Vector2(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"));
         }
-    }
-
-    public void KeyTaken()
-    {
-        hasKey = true;
-        GetComponent<UIManager>().ActivateUIKey();
-    }
-
-    public void DeleteLife()
-    {
-        print("deltelife");
-        if (godMode) return;
-        lifesNumber--;
-        //GameStatusManager.Instance.SetNumeroVidas(numeroVidas);//STATUS DEL JUEGO
-        GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
-        if (lifesNumber == 0)
-        {
-            //GameOver
-            textGameOver.SetActive(true);
-            player.SetActive(false);
-            //Invoke(nameof(LoadIntroScene), TIME_TO_RELOAD);
-        }
-    }
-
-    private void LoadIntroScene()
-    {
-        SceneManager.LoadScene("CoverScene");
     }
 
     private bool UsingVJoystick()
@@ -132,5 +139,4 @@ public class GameManager : MonoBehaviour
         //En el Editor de Unity
         return useVJoystick;
     }
-
 }

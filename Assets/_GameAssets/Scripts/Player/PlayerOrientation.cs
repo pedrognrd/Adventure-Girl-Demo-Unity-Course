@@ -4,12 +4,31 @@ using UnityEngine;
 
 public class PlayerOrientation : MonoBehaviour
 {
+    // Virtual Joystick reference
+    public FixedJoystick joystickPlayer;
+    // Valour of input's X
     float x;
+
+    private void Awake()
+    {
+        //Asignación del VIRTUAL JOYSTICK
+        if (GameObject.Find("Fixed Joystick") != null)
+        {
+            joystickPlayer = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
+        }
+    }
 
     void Update()
     {
-        x = Input.GetAxis("Horizontal");
-        
+        if (joystickPlayer != null && joystickPlayer.isActiveAndEnabled)
+        {
+            x = joystickPlayer.Horizontal;
+        }
+        else
+        {
+            x = Input.GetAxis("Horizontal");
+        }
+
         if (x > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
