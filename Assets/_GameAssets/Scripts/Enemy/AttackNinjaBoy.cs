@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class AttackNinjaBoy : MonoBehaviour
 {
     Animator animator;
@@ -20,16 +21,19 @@ public class AttackNinjaBoy : MonoBehaviour
     public Transform spawnPoint;
     private float xEnemy;
     private float xPlayer;
-   
+
     /// <summary>
     /// Defines if shooting is able or not
     /// </summary>
     public bool canShoot = true;
+    public AudioClip audioShoot;
+    AudioSource audioSource;
 
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         player = GameObject.Find("Player");
+        audioSource = GetComponentInParent<AudioSource>();
     }
 
     private void Update()
@@ -77,7 +81,7 @@ public class AttackNinjaBoy : MonoBehaviour
             projectile.GetComponent<Rigidbody2D>().AddForce(new Vector2(horizontalForce * direction, verticalForce));
             canShoot = false;
             Invoke(nameof(RestoreThrow), 0.9f);
-
+            audioSource.PlayOneShot(audioShoot);
             // TODO
             //GetComponentInParent<PlayerSoundManager>().PlayAudioFire();
         }

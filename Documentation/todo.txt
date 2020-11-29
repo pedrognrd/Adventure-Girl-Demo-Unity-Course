@@ -1,19 +1,17 @@
-TODO
-- Player Sound Manager
-- Taking HUD items
-	- Coins and Score
+CREDTIS:
+https://opengameart.org/content/jump-and-run-8-bit
+Attribution instructions:  You must link back to http://opengameart.org in your credits.
 
+TODO
+- Spikes
+- Floating on water
 - Install Android JDK
-- Mobile controls
-	- Scripts for buttons and joystick
 
 - GameManager
 - Sonidos al disparar tanto de Player como de Ninja Boy
 
-- UIManager
-	- ActivateUIDiamond
-
 STOPPERS
+- When Ninja Boy damages Player, Player does not move
 - When Using Joystick Player does not look at left
 - When Dying Stop game
 - Coins values & score
@@ -22,7 +20,26 @@ STOPPERS
 	- 1 CoinGoldLarge = 5 CoinGoldMedium
 
 DONE
+- GameStatusManager
+	- Taking score and lifes
+
+- Player Sound Manager
+	- Player
+		- Coin
+		- Diamond
+		- Jump
+		- Key
+		- Landing
+		- Shoot
+		- Level completed
+	- Enemy
+		- Dying
+
+- Mobile controls
+	- Scripts for buttons and joystick
+
 - Taking HUD items
+	- Coins and Score
 	- Diamonds
 	- Key
 

@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Horizontal Force")]
     [Range(0, 2000)]
     public float horizontalForce;
+    private PlayerSoundManager psm;
 
     /// <summary>
     /// Defines if shooting is able or not
@@ -22,6 +23,7 @@ public class PlayerAttack : MonoBehaviour
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        psm = GetComponent<PlayerSoundManager>();
     }
 
     private void Update()
@@ -48,6 +50,7 @@ public class PlayerAttack : MonoBehaviour
             canShoot = false;
             Invoke(nameof(RestoreFire), 0);
             //GetComponentInParent<PlayerSoundManager>().PlayAudioFire();
+            psm.PlayAudioShoot();
         }
     }
 

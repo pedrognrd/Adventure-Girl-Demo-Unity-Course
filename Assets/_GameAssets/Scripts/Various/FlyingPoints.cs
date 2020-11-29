@@ -15,17 +15,15 @@ public class FlyingPoints : MonoBehaviour
     private int points = 12;
     public void SetPoints(int _points)
     {
-        print("_points " + _points);
         this.points = _points;
-        print("points " + points);
         if (points >= 10)
         {
-            spriteRenderer0.sprite = Resources.Load<Sprite>("Digitos/hud" + points.ToString().Substring(0, 1));
-            spriteRenderer1.sprite = Resources.Load<Sprite>("Digitos/hud" + points.ToString().Substring(1, 1));
+            spriteRenderer0.sprite = Resources.Load<Sprite>("Digits/hud" + points.ToString().Substring(0, 1));
+            spriteRenderer1.sprite = Resources.Load<Sprite>("Digits/hud" + points.ToString().Substring(1, 1));
         }
         else
         {
-            spriteRenderer1.sprite = Resources.Load<Sprite>("Digitos/hud" + points.ToString().Substring(0, 1));
+            spriteRenderer1.sprite = Resources.Load<Sprite>("Digits/hud" + points.ToString().Substring(0, 1));
         }
     }
     private void Update()

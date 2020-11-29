@@ -7,9 +7,15 @@ public class Enemy : MonoBehaviour
     Animator animator;
     public bool dying = false;
 
+    public AudioClip audioDying;
+    private AudioSource audioSource;
+    
+
+
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -23,8 +29,6 @@ public class Enemy : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            // TODO
-            //collision.gameObject.GetComponent<PlayerReaction>().JumpBack();
             // If enemy is Ninja Boy, he stops attacking before dying
             if (gameObject.layer == 11)
             {
@@ -44,5 +48,10 @@ public class Enemy : MonoBehaviour
     public void Dying()
     {
         Destroy(transform.parent.gameObject);
+    }
+
+    public void PlayAudioDying()
+    {
+        audioSource.PlayOneShot(audioDying);
     }
 }

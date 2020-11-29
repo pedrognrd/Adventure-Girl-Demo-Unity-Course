@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class PlayerCoinCollector : MonoBehaviour
 {
-    //private PlayerSoundManager psm;
+    private PlayerSoundManager psm;
     private void Awake()
     {
-        //psm = GetComponent<PlayerSoundManager>();
+        psm = GetComponent<PlayerSoundManager>();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Coin"))
         {
-            //psm.PlayAudioCoin();
+            // TODO
+            psm.PlayAudioCoin();
             Destroy(collision.transform.parent.gameObject);
             int points = collision.gameObject.GetComponentInParent<Coin>().points;
-            //Play sound!!!
             GameObject.Find("GameManager").GetComponent<GameManager>().Scoring(points);
         }
     }

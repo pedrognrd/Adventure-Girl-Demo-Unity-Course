@@ -10,15 +10,12 @@ public class Coin : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        print("OnApplicationQuit");
         scoring = true;
     }
     private void OnDestroy()
     {
-        print("OnDestroy");
         if (scoring == false)
         {
-            
             GameObject fn = GameObject.Instantiate(flyingPointsPrefab, transform.position, transform.rotation);
             fn.GetComponent<FlyingPoints>().SetPoints(points);
         }

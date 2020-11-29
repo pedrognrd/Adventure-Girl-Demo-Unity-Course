@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
     // Current State of the game
     public State state = State.Menu;
 
+    [Header("CONFIGURATION")]
+    //Configuracion
+    public bool soundOn = true;
+    public bool musicOn = true;
+
     [Header("INVENTORY")]
     //Inventario
     public bool hasDiamondBlue = false;
@@ -59,7 +64,7 @@ public class GameManager : MonoBehaviour
 
         player = GameObject.Find("Player");
         score = 0;
-        if (continueGame) RecoverState();
+        if (continueGame) StateRecover();
         textScore.text = score.ToString();
         lifesNumber = maxLifesNumber;
 
@@ -74,9 +79,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        //STATUS
+        if (GameStatusManager.Instance.GetLifesNumber() > 0)
+        {
+            lifesNumber = GameStatusManager.Instance.GetLifesNumber();
+            GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
+            score = GameStatusManager.Instance.GetScore();
+            textScore.text = score.ToString();
+        }
+        //FIN DE STATUS
+
+    }
+
     private void Update()
     {
-        print("score " + score);
     }
 
     public void DeleteLife()
@@ -85,7 +103,7 @@ public class GameManager : MonoBehaviour
         lifesNumber--;
         
         // TODO
-        //GameStatusManager.Instance.SetNumeroVidas(numeroVidas);//STATUS DEL JUEGO
+        GameStatusManager.Instance.SetLifesNumber(lifesNumber);//STATUS DEL JUEGO
         GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
         if (lifesNumber == 0)
         {
@@ -101,7 +119,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("CoverScene");
     }
 
-    public void RecoverState()
+    public void StateRecover()
     {
         continueGame = false;
         if (PlayerPrefs.HasKey("Score"))
@@ -113,6 +131,25 @@ public class GameManager : MonoBehaviour
             }
             player.transform.position = new Vector2(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"));
         }
+    }
+
+    public void StateSave()
+    {
+        //Guardamos la puntuacion, si tenemos llave o no.
+        PlayerPrefs.SetInt("Score", score);
+        int key = hasKey ? 1 : 0;
+        PlayerPrefs.SetInt("HasKey", key);
+        PlayerPrefs.SetString("SceneName", SceneManager.GetActiveScene().name);
+        PlayerPrefs.SetFloat("x", player.transform.position.x);
+        PlayerPrefs.SetFloat("y", player.transform.position.y);
+        PlayerPrefs.Save();
+    }
+
+    public void Scoring(int points)
+    {
+        score += points;
+        GameStatusManager.Instance.SetScore(score);//STATUS DEL JUEGO
+        textScore.text = score.ToString();
     }
 
     public void TakingKey()
@@ -142,28 +179,20 @@ public class GameManager : MonoBehaviour
         GetComponent<UIManager>().ActivateUIDiamond(diamondName);
     }
 
-    public void Scoring(int points)
-    {
-        score += points;
-        //GameStatusManager.Instance.SetPuntuacion(puntuacion);//STATUS DEL JUEGO
-        textScore.text = score.ToString();
-    }
-
     private bool UsingVJoystick()
     {
         bool mobilePlatfomr =
             ((Application.platform == RuntimePlatform.Android) || (Application.platform == RuntimePlatform.IPhonePlayer));
         if (mobilePlatfomr)
         {
-            //En un dispositivo movil
+            // When using mobile device
             useVJoystick = true;
         }
         else if (Application.platform != RuntimePlatform.WindowsEditor)
         {
-            //En el resto
+            // When using desktop device
             useVJoystick = false;
         }
-        //En el Editor de Unity
         return useVJoystick;
     }
 }

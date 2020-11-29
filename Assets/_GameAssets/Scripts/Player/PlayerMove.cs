@@ -17,12 +17,13 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigidBody;
     private float x;
     private float y;
-    
+
+    private PlayerSoundManager psm;
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        // TODO Add Player Sound Manager
+        psm = GetComponent<PlayerSoundManager>();
 
         // Detect if we are using Fixed Joystick
         if (GameObject.Find("Fixed Joystick") != null)
@@ -99,6 +100,7 @@ public class PlayerMove : MonoBehaviour
             rigidBody.AddForce(Vector2.up * forceJump, ForceMode2D.Impulse);
             animator.SetBool("Jumping", true);
             GameObject.Find("Player").GetComponent<PlayerAttack>().canShoot = false;
+            psm.PlayAudioJump();
         }
     }
 }
