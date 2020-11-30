@@ -3,14 +3,20 @@ https://opengameart.org/content/jump-and-run-8-bit
 Attribution instructions:  You must link back to http://opengameart.org in your credits.
 
 TODO
-- Spikes
-- Floating on water
-- Install Android JDK
+- Lifes Recover Objects
+- EndGameScene
+- Enemies touch player, she can move right.
+- Scene2
+	- Build the map
 
+- Checkpoints
+	- Is working?
+- Floating on water --> Jump higher when floating
+- Install Android JDK
 - GameManager
-- Sonidos al disparar tanto de Player como de Ninja Boy
 
 STOPPERS
+- Ninja Boy attacks constantly
 - When Ninja Boy damages Player, Player does not move
 - When Using Joystick Player does not look at left
 - When Dying Stop game
@@ -20,6 +26,10 @@ STOPPERS
 	- 1 CoinGoldLarge = 5 CoinGoldMedium
 
 DONE
+- When die, IntroScene loads
+- Exit
+- Sunken Platforms
+- Spikes
 - GameStatusManager
 	- Taking score and lifes
 

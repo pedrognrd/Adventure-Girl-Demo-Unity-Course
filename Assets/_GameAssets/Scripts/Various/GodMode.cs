@@ -23,10 +23,10 @@ public class GodMode : MonoBehaviour
 
     public void GodModeOn()
     {
-        StartCoroutine("FlashCoroutine");
+        StartCoroutine("GodModeCoroutine");
     }
 
-    IEnumerator FlashCoroutine()
+    IEnumerator GodModeCoroutine()
     {
         gameManager.godMode = true;
         for (int i = 0; i < rate; i++)

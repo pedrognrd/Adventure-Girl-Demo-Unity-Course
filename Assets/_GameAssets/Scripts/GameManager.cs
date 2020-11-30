@@ -110,13 +110,13 @@ public class GameManager : MonoBehaviour
             //GameOver
             textGameOver.SetActive(true);
             player.SetActive(false);
-            //Invoke(nameof(LoadIntroScene), TIME_TO_RELOAD);
+            Invoke(nameof(LoadIntroScene), TIME_TO_RELOAD);
         }
     }
 
     private void LoadIntroScene()
     {
-        SceneManager.LoadScene("CoverScene");
+        SceneManager.LoadScene("IntroScene");
     }
 
     public void StateRecover()
