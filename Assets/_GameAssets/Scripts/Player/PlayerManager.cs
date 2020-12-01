@@ -51,9 +51,16 @@ public class PlayerManager : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        if (collision.gameObject.CompareTag("Star"))
+        {
+            psm.PlayAudioStar();
+            GetComponent<GodMode>().GodModeOnByStar(20);
+            Destroy(collision.gameObject);
+        }
+
         if (collision.gameObject.CompareTag("Water"))
         {
-            //psm.PlayAudioLife();
+            psm.PlayAudioWater();
             DamageReceived();
         }
     }

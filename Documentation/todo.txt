@@ -3,13 +3,15 @@ https://opengameart.org/content/jump-and-run-8-bit
 Attribution instructions:  You must link back to http://opengameart.org in your credits.
 
 TODO
+- Keeping diamonds when loading new scene
 - When sunking in water, received damaged
-- Change scene but mobile controls are on
 - Ninja Boy attacks constantly
 
-- EndGameScene
+
 - Scene2
-	- Build the map
+	- New Enemies:
+		- Zombies
+		- Jack O' Lantern
 - Floating on water --> Jump higher when floating
 - Install Android JDK
 - GameManager
@@ -24,6 +26,12 @@ STOPPERS
 	- 1 CoinGoldLarge = 5 CoinGoldMedium
 
 DONE
+- Change scene but mobile controls are on
+- When change scene and died, not start back to last cheking flag
+- EndGameScene
+- Scene2
+	- Build the map
+- Star that gives God Mode for longer time
 - Checkpoints workin
 - Lifes Recover Objects
 - When Ninja Boy damages Player, Player does not move

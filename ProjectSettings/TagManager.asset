@@ -12,6 +12,7 @@ TagManager:
   - Life
   - water
   - Water
+  - Star
   layers:
   - Default
   - TransparentFX

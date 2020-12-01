@@ -26,6 +26,14 @@ public class GodMode : MonoBehaviour
         StartCoroutine("GodModeCoroutine");
     }
 
+    public void GodModeOnByStar(int newRate)
+    {
+        print(rate);
+        rate += newRate;
+        print(rate);
+        StartCoroutine("GodModeCoroutine");
+    }
+
     IEnumerator GodModeCoroutine()
     {
         gameManager.godMode = true;

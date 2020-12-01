@@ -14,7 +14,9 @@ public class PlayerSoundManager : MonoBehaviour
     public AudioClip audioLife;
     public AudioClip audioLanding;
     public AudioClip audioShoot;
-    
+    public AudioClip audioStar;
+    public AudioClip audioWater;
+
     //public AudioClip audioDead;
     public AudioClip audioLevelCompleted;
 
@@ -59,4 +61,16 @@ public class PlayerSoundManager : MonoBehaviour
     {
         audioSource.PlayOneShot(audioShoot);
     }
+
+    public void PlayAudioStar()
+    {
+        audioSource.PlayOneShot(audioStar);
+    }
+    
+
+    public void PlayAudioWater()
+    {
+        audioSource.PlayOneShot(audioWater);
+    }
+    
 }
