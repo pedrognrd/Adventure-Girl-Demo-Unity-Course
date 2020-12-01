@@ -6,7 +6,6 @@ using UnityEngine;
 public class AttackNinjaBoy : MonoBehaviour
 {
     Animator animator;
-    [Header("Attack Distance")]
     [Range(0, 20)]
     public float attackDistance;
     private float distanceToPlayer;
@@ -20,7 +19,9 @@ public class AttackNinjaBoy : MonoBehaviour
     [Header("Spawner Point")]
     public Transform spawnPoint;
     private float xEnemy;
+    private float yEnemy; 
     private float xPlayer;
+    private float yPlayer;
 
     /// <summary>
     /// Defines if shooting is able or not
@@ -39,17 +40,19 @@ public class AttackNinjaBoy : MonoBehaviour
     private void Update()
     {
         xEnemy = gameObject.transform.position.x;
+        yEnemy = gameObject.transform.position.y; 
         xPlayer = player.transform.position.x;
- 
+        yPlayer = player.transform.position.y;
+
         // Ninja Boy only attacks when Player is in line with him, but not if player is lower or higher.
-        if ((xEnemy - xPlayer) < attackDistance && (player.transform.position.y - gameObject.transform.position.y) < 1)
+        if ((xEnemy - xPlayer) < attackDistance && (yEnemy - yPlayer) < 1)
         {
             // Detects if player is left or right from Ninja Boy
             DetectPayer();
             GetComponentInParent<TwoPointsMove>().enabled = false;
             animator.SetBool("Throwing", true);
             Throw();
-        } else 
+        } if ((xEnemy - xPlayer) > attackDistance && (yEnemy - yPlayer) > 1)
         {
             GetComponentInParent<TwoPointsMove>().enabled = true;
             animator.SetBool("Throwing", false);

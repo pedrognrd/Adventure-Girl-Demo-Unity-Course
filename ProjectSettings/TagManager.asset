@@ -9,6 +9,9 @@ TagManager:
   - Diamond
   - Coin
   - Adherent
+  - Life
+  - water
+  - Water
   layers:
   - Default
   - TransparentFX

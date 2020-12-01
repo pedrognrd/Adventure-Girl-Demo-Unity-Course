@@ -11,6 +11,7 @@ public class PlayerSoundManager : MonoBehaviour
     public AudioClip audioDiamond;
     public AudioClip audioJump; 
     public AudioClip audioKey;
+    public AudioClip audioLife;
     public AudioClip audioLanding;
     public AudioClip audioShoot;
     
@@ -44,6 +45,12 @@ public class PlayerSoundManager : MonoBehaviour
     {
         audioSource.PlayOneShot(audioLanding);
     }
+
+    public void PlayAudioLife()
+    {
+        audioSource.PlayOneShot(audioLife);
+    }
+    
     public void PlayAudioDamage()
     {
         audioSource.PlayOneShot(audioDamage);

@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     private const int TIME_TO_RELOAD = 2;
 
     [Header("GAME STATE")]
+    [SerializeField]
+    private Text textPause;
     // Current State of the game
     public State state = State.Menu;
 
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
     private GameObject panelLifes;
     private Text textScore;
     private GameObject textGameOver;
+    private GameObject textGamePause;
     private GameObject controlsMobile;
 
     [Header("HUD STATES")]
@@ -60,6 +63,9 @@ public class GameManager : MonoBehaviour
         textScore = GameObject.Find("TextScore").GetComponent<Text>();
         textGameOver = GameObject.Find("TextGameOver");
         textGameOver.SetActive(false);
+
+        textGamePause = GameObject.Find("TextGamePause");
+        textGamePause.SetActive(false);
         controlsMobile = GameObject.Find("ControlsMobile");
 
         player = GameObject.Find("Player");
@@ -95,6 +101,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        // TODO PAUSE GAME
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (state == State.Playing)
+            {
+                PauseGame();
+            }
+            else if (state == State.Pause)
+            {
+                UnpauseGame();
+            }
+        }
     }
 
     public void DeleteLife()
@@ -114,9 +132,30 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddLifes()
+    {
+        GameStatusManager.Instance.SetLifesNumber(lifesNumber);//STATUS DEL JUEGO
+        GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
+    }
+
     private void LoadIntroScene()
     {
         SceneManager.LoadScene("IntroScene");
+    }
+
+    public void PauseGame()
+    {
+        state = State.Pause;
+        StopGame();
+        textPause.enabled = true;
+    }
+
+    public void Scoring(int points)
+    {
+        score += points;
+        //STATUS DEL JUEGO
+        GameStatusManager.Instance.SetScore(score);
+        textScore.text = score.ToString();
     }
 
     public void StateRecover()
@@ -145,12 +184,13 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void Scoring(int points)
+    private void StopGame()
     {
-        score += points;
-        GameStatusManager.Instance.SetScore(score);//STATUS DEL JUEGO
-        textScore.text = score.ToString();
+        player = GameObject.Find("Player");
+        Time.timeScale = 0;
+        player.GetComponent<PlayerManager>().enabled = false;
     }
+
 
     public void TakingKey()
     {
@@ -177,6 +217,14 @@ public class GameManager : MonoBehaviour
         }
 
         GetComponent<UIManager>().ActivateUIDiamond(diamondName);
+    }
+
+    private void UnpauseGame()
+    {
+        state = State.Playing;
+        Time.timeScale = 1;
+        player.GetComponent<PlayerManager>().enabled = true;
+        textPause.enabled = false;
     }
 
     private bool UsingVJoystick()

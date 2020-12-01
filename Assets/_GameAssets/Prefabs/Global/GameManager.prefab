@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5cbd45e749cf9499da8f3d516707be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textPause: {fileID: 0}
   state: 1
   soundOn: 1
   musicOn: 1

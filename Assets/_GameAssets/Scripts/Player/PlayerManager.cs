@@ -13,11 +13,23 @@ public class PlayerManager : MonoBehaviour
         psm = GetComponent<PlayerSoundManager>();
     }
 
+    private void Update()
+    {
+        /*if (Input.GetKeyDown(KeyCode.P))
+        {
+            gameManager.PauseGame();
+        }
+
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            gameManager.PauseGame();
+        }*/
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Diamond"))
         {
-
             diamondName = collision.gameObject.name;
             psm.PlayAudioDiamond();
             GameObject.Find("GameManager").GetComponent<GameManager>().TakingDiamond(diamondName);
@@ -29,6 +41,20 @@ public class PlayerManager : MonoBehaviour
             psm.PlayAudioKey();
             GameObject.Find("GameManager").GetComponent<GameManager>().TakingKey();
             Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Life"))
+        {
+            psm.PlayAudioLife();
+            GameObject.Find("GameManager").GetComponent<GameManager>().lifesNumber++;
+            GameObject.Find("GameManager").GetComponent<GameManager>().AddLifes();
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            //psm.PlayAudioLife();
+            DamageReceived();
         }
     }
 

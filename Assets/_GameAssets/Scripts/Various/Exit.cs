@@ -17,7 +17,6 @@ public class Exit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("hasKey " + gameManager.hasKey);
         if (collision.CompareTag("Player"))
         {
             if (gameManager.hasKey)

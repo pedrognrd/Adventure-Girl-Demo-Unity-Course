@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 2852363918638653868}
   - component: {fileID: 2852363918638653869}
   m_Layer: 0
-  m_Name: TerrainExtra1
+  m_Name: TerrainExtra3
   m_TagString: Adherent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

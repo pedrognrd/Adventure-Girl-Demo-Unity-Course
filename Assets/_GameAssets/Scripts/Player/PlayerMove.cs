@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
             y = Input.GetAxis("Vertical");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             Jump();
         }
@@ -91,6 +91,8 @@ public class PlayerMove : MonoBehaviour
         {
             animator.SetBool("Running", false);
         }
+
+        beingFired = false;
     }
 
     public void Jump()

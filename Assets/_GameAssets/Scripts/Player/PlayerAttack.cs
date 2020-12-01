@@ -28,13 +28,13 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightControl))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             animator.SetBool("Shooting", true);
             Fire();
         }
 
-        if (Input.GetKeyUp(KeyCode.RightControl))
+        if (Input.GetKeyUp(KeyCode.X))
         {
             animator.SetBool("Shooting", false);
         }
