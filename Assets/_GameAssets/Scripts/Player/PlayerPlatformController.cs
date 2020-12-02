@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerPlatformController : MonoBehaviour
 {
+    // this script fixes the stability of the player when entering ina platform
     private const string TAG_ADHERENT = "Adherent";
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -14,6 +15,6 @@ public class PlayerPlatformController : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-
+        transform.SetParent(null);
     }
 }

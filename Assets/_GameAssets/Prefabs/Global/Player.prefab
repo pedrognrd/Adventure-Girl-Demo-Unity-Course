@@ -202,7 +202,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -409,9 +409,11 @@ MonoBehaviour:
   audioDiamond: {fileID: 8300000, guid: c9b6d3754b4cafb4fb68b9d3991778ec, type: 3}
   audioJump: {fileID: 8300000, guid: 0d9225e24b48d46068659021771a1b7c, type: 3}
   audioKey: {fileID: 8300000, guid: 25b73ff12b0b1e145983b9e44791c313, type: 3}
-  audioLife: {fileID: 0}
+  audioLife: {fileID: 8300000, guid: 2279ea9b8648f2a40b8e79fa4f34dbb5, type: 3}
   audioLanding: {fileID: 8300000, guid: 737cc5204a0639e41982cd186a4f4cfd, type: 3}
   audioShoot: {fileID: 8300000, guid: d0f3539f53bb645619a7397f1fc9e2b4, type: 3}
+  audioStar: {fileID: 8300000, guid: fc68840ec0d327945a5191101ae56227, type: 3}
+  audioWater: {fileID: 8300000, guid: 624d89c15403bbc489b69f892553b9e3, type: 3}
   audioLevelCompleted: {fileID: 8300000, guid: b55202a6cff9b174abe235480b441275, type: 3}
 --- !u!114 &4875258340013704211
 MonoBehaviour:

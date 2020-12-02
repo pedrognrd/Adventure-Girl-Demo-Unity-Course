@@ -11706,7 +11706,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 25.5, y: -9.97676}
+  m_Offset: {x: 25.5, y: -8.913342}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -11717,7 +11717,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 93, y: 6.0519485}
+  m_Size: {x: 93, y: 8.178783}
   m_EdgeRadius: 0
 --- !u!1001 &1497112050
 PrefabInstance:
@@ -25781,7 +25781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7221557746993607957, guid: 862916f5b4f0e5146bf1dff7b8efba12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.43
+      value: -0.62
       objectReference: {fileID: 0}
     - target: {fileID: 7221557746993607957, guid: 862916f5b4f0e5146bf1dff7b8efba12, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26641,6 +26641,10 @@ PrefabInstance:
       propertyPath: textPause
       value: 
       objectReference: {fileID: 1171812899}
+    - target: {fileID: 5505011246497435042, guid: b529771e1e9f44245984fa9c5686fe87, type: 3}
+      propertyPath: useVJoystick
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5505011246497435043, guid: b529771e1e9f44245984fa9c5686fe87, type: 3}
       propertyPath: m_LocalPosition.x
       value: 552.15955
@@ -26850,18 +26854,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6294997508500493512, guid: eca89d8f8f56db84b9668d6a5b3c0b31, type: 3}
-      propertyPath: audioLife
-      value: 
-      objectReference: {fileID: 8300000, guid: 2279ea9b8648f2a40b8e79fa4f34dbb5, type: 3}
-    - target: {fileID: 6294997508500493512, guid: eca89d8f8f56db84b9668d6a5b3c0b31, type: 3}
-      propertyPath: audioStar
-      value: 
-      objectReference: {fileID: 8300000, guid: fc68840ec0d327945a5191101ae56227, type: 3}
-    - target: {fileID: 6294997508500493512, guid: eca89d8f8f56db84b9668d6a5b3c0b31, type: 3}
-      propertyPath: audioWater
-      value: 
-      objectReference: {fileID: 8300000, guid: 624d89c15403bbc489b69f892553b9e3, type: 3}
     - target: {fileID: 6294997508500493516, guid: eca89d8f8f56db84b9668d6a5b3c0b31, type: 3}
       propertyPath: joystickPlayer
       value: 

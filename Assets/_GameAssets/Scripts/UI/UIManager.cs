@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    // Setting all the UI items
     private Image imageKey;
     private Image keyGreen;
     private Image imageDiamondBlue;
@@ -14,6 +15,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
+        // link UI items with items in scene
         imageKey = GameObject.Find("ImageKeyOn").GetComponent<Image>();
         imageDiamondBlue = GameObject.Find("ImageDiamondBlueOn").GetComponent<Image>();
         imageDiamondGreen = GameObject.Find("ImageDiamondGreenOn").GetComponent<Image>();
@@ -60,9 +62,9 @@ public class UIManager : MonoBehaviour
         CleanPanelLives(panelLifes);
         for (int i = 0; i < lifesNumber; i++)
         {
-            GameObject nuevaImagenVida = Instantiate(prefabImageLife, transform.position, transform.rotation);
-            nuevaImagenVida.transform.SetParent(panelLifes.transform);
-            nuevaImagenVida.transform.localScale = Vector3.one;
+            GameObject newImageLife = Instantiate(prefabImageLife, transform.position, transform.rotation);
+            newImageLife.transform.SetParent(panelLifes.transform);
+            newImageLife.transform.localScale = Vector3.one;
         }
     }
 }

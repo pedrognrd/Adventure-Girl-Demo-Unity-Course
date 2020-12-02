@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     Animator animator;
     private bool beingFired = false;
     private bool canShoot;
-    public FixedJoystick joystickPlayer;
+    private FixedJoystick joystickPlayer;
     Rigidbody2D rigidBody;
     private float x;
     private float y;
@@ -25,15 +25,16 @@ public class PlayerMove : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         psm = GetComponent<PlayerSoundManager>();
 
-        // Detect if we are using Fixed Joystick
-        if (GameObject.Find("Fixed Joystick") != null)
+        // Detects if we are using Fixed Joystick
+        if (GameObject.Find("Joystick") != null)
         {
-            joystickPlayer = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
+            joystickPlayer = GameObject.Find("Joystick").GetComponent<FixedJoystick>();
         }
     }
 
     private void Update()
     {
+        // Checking if player is using keyboard or joystick
         if (joystickPlayer != null && joystickPlayer.isActiveAndEnabled)
         {
             x = joystickPlayer.Horizontal;
@@ -53,6 +54,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // While displacing or jumping player cannot shoot
         Displace();
 
         if (Mathf.Abs(rigidBody.velocity.y) == 0f)
@@ -82,7 +84,6 @@ public class PlayerMove : MonoBehaviour
             rigidBody.velocity = new Vector2(x * Time.deltaTime * speed, rigidBody.velocity.y);
         }
         
-
         if (Mathf.Abs(rigidBody.velocity.x) > 0)
         {
             animator.SetBool("Running", true);

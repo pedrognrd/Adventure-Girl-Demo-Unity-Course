@@ -12,13 +12,9 @@ public class PlayerManager : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         psm = GetComponent<PlayerSoundManager>();
     }
-
-    private void Update()
-    {
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Controlling when player collides against collectible items 
         if (collision.gameObject.CompareTag("Diamond"))
         {
             diamondName = collision.gameObject.name;
@@ -49,6 +45,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
+        // Controlling when player collides against water in Scene1 or graveyard in Scene2
         if (collision.gameObject.CompareTag("Water"))
         {
             psm.PlayAudioWater();
@@ -58,6 +55,7 @@ public class PlayerManager : MonoBehaviour
 
     public void DamageReceived()
     {
+        // If player is not in god mode, is damaged
         if (!gameManager.godMode)
         {
             GameObject.Find("GameManager").GetComponent<GameManager>().DeleteLife();

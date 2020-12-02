@@ -6,8 +6,8 @@ using UnityEngine;
 public class AttackNinjaBoy : MonoBehaviour
 {
     Animator animator;
-    [Range(0, 20)]
-    public float attackDistance;
+    public float attackDistancePositive = 6;
+    public float attackDistanceNegative = -6;
     private float distanceToPlayer;
     GameObject player;
     [Header("Forces")]
@@ -39,6 +39,7 @@ public class AttackNinjaBoy : MonoBehaviour
 
     private void Update()
     {
+        // Ninja Boy only attacks if player is a distance to him lower than 6 and only if player is horizontal line with him
         xEnemy = gameObject.transform.position.x;
         yEnemy = gameObject.transform.position.y; 
         xPlayer = player.transform.position.x;
@@ -46,7 +47,7 @@ public class AttackNinjaBoy : MonoBehaviour
 
         if ((xPlayer - xEnemy) < 0)
         {
-            if ((xPlayer - xEnemy) > -6)
+            if ((xPlayer - xEnemy) > attackDistanceNegative)
             {
                 if ((yPlayer - yEnemy) > 0 && (yPlayer - yEnemy) < 1)
                 {
@@ -58,7 +59,7 @@ public class AttackNinjaBoy : MonoBehaviour
                 }
             }
 
-            if ((xPlayer - xEnemy) < -6)
+            if ((xPlayer - xEnemy) < attackDistanceNegative)
             {
                 AttackOff();
             }
@@ -66,7 +67,7 @@ public class AttackNinjaBoy : MonoBehaviour
 
         if ((xPlayer - xEnemy) > 0)
         {
-            if ((xPlayer - xEnemy) < 6)
+            if ((xPlayer - xEnemy) < attackDistancePositive)
             {
                 if ((yPlayer - yEnemy) > 0 && (yPlayer - yEnemy) < 1)
                 {
@@ -78,19 +79,21 @@ public class AttackNinjaBoy : MonoBehaviour
                 }
             }
 
-            if ((xPlayer - xEnemy) > 6)
+            if ((xPlayer - xEnemy) > attackDistancePositive)
             {
                 AttackOff();
             }
         }
     }
 
+    // Stops attacking
     private void AttackOff()
     {
         GetComponentInParent<TwoPointsMove>().enabled = true;
         animator.SetBool("Throwing", false);
     }
 
+    // Starts attacking
     private void AttackOn()
     {
         GetComponentInParent<TwoPointsMove>().enabled = false;
@@ -112,6 +115,7 @@ public class AttackNinjaBoy : MonoBehaviour
         }
     }
 
+    // Trows kunais
     private void Throw()
     {
         if (canShoot)

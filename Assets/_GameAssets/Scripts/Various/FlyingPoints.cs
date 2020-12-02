@@ -15,6 +15,7 @@ public class FlyingPoints : MonoBehaviour
     private int points = 12;
     public void SetPoints(int _points)
     {
+        // Take one or two sprites from Digits/hud folder according with the score that has to be shown
         this.points = _points;
         if (points >= 10)
         {
@@ -28,6 +29,7 @@ public class FlyingPoints : MonoBehaviour
     }
     private void Update()
     {
+        // Numbers are shown, moving up and evanescending
         transform.Translate(Vector2.up * speed * Time.deltaTime);
         Color nc = spriteRenderer1.color;
         nc.a = nc.a - alphaSpeed * Time.deltaTime;
@@ -36,7 +38,7 @@ public class FlyingPoints : MonoBehaviour
         {
             spriteRenderer0.color = nc;
         }
-        //Cuando desaparez el numero se destruye
+        // When numbers dissapeared, object is destroyed too
         if (nc.a <= 0) Destroy(gameObject);
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coins : MonoBehaviour
+public class LightsAshCar : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

@@ -2,14 +2,13 @@
 
 public class GameStatusManager : MonoBehaviour
 {
+    // Inventory HUD items
     [Header("INVENTORY")]
     //Inventario
     public bool hasDiamondBlue = false;
     public bool hasDiamondGreen = false;
     public bool hasDiamondRed = false;
     public bool hasDiamondYellow = false;
-
-
     public bool hasKey = false;
 
     [SerializeField]
@@ -33,6 +32,7 @@ public class GameStatusManager : MonoBehaviour
         }
     }
 
+    // Next methods are the getters&setters of for most of the HUD items
     public bool GetHasDiamondBlue()
     {
         return hasDiamondBlue;

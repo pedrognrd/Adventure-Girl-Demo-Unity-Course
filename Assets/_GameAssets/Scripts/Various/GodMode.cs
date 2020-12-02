@@ -21,21 +21,22 @@ public class GodMode : MonoBehaviour
         renderer = GetComponentInChildren<Renderer>();
     }
 
+    // Player is immune when is damage
     public void GodModeOn()
     {
         StartCoroutine("GodModeCoroutine");
     }
 
+    // Player is immune when taking a star, time period is longer
     public void GodModeOnByStar(int newRate)
     {
-        print(rate);
         rate += newRate;
-        print(rate);
         StartCoroutine("GodModeCoroutine");
     }
 
     IEnumerator GodModeCoroutine()
     {
+        // When player is in god mode is immune for a period of time (rate)
         gameManager.godMode = true;
         for (int i = 0; i < rate; i++)
         {

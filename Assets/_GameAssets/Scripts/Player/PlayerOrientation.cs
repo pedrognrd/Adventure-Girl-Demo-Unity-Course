@@ -9,17 +9,18 @@ public class PlayerOrientation : MonoBehaviour
     // Valour of input's X
     float x;
 
-    private void Awake()
+    private void Start()
     {
-        //Asignación del VIRTUAL JOYSTICK
-        if (GameObject.Find("Fixed Joystick") != null)
+        // Detects if we are using Fixed Joystick
+        if (GameObject.Find("Joystick") != null)
         {
-            joystickPlayer = GameObject.Find("Fixed Joystick").GetComponent<FixedJoystick>();
+            joystickPlayer = GameObject.Find("Joystick").GetComponent<FixedJoystick>();
         }
     }
 
     void Update()
     {
+        // Horizontal controls for keyboard and joystick
         if (joystickPlayer != null && joystickPlayer.isActiveAndEnabled)
         {
             x = joystickPlayer.Horizontal;
@@ -29,6 +30,7 @@ public class PlayerOrientation : MonoBehaviour
             x = Input.GetAxis("Horizontal");
         }
 
+        // Orientation of the model inside player left-right
         if (x > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);

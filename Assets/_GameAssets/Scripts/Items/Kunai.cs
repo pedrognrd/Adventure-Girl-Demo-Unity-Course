@@ -12,6 +12,7 @@ public class Kunai : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // When kunai impacts in player
         if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<JumpBack>().JumpingBack();

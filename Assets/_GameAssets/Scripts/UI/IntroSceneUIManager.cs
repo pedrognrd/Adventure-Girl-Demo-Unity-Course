@@ -17,19 +17,20 @@ public class IntroSceneUIManager : MonoBehaviour
     }
     public void LoadScene1()
     {
-        //PlayerPrefs.DeleteAll();//Borra todo.
+        // Loading Scene1
         PlayerPrefs.DeleteKey("Score");
         SceneManager.LoadScene("Scene1");
     }
     public void LoadStoredGame()
     {
+        // Loading Stored game in last scene
         string sceneName = PlayerPrefs.GetString("SceneName");
         GameManager.continueGame = true;
         SceneManager.LoadScene(sceneName);
     }
     public void ConfigGame()
     {
-        Debug.LogError("FALTA POR IMPLEMENTAR EL METODO CONFIGGAME");
+        // TODO
     }
     public void ExitGame()
     {

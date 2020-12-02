@@ -16,7 +16,7 @@ public class TwoPointsMove : MonoBehaviour
     
     void Update()
     {
-        //print("moving " + moving);
+        // Some enemies and objects can move between two points
         newPosition = Vector2.Lerp(initPos.position, endPos.position, pct);
         objectToMove.transform.position = newPosition;
 

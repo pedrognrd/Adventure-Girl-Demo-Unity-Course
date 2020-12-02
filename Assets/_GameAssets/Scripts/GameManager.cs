@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public bool musicOn = true;
 
     [Header("INVENTORY")]
-    //Inventario
+    //Inventory
     public bool hasDiamondBlue = false;
     public bool hasDiamondGreen = false;
     public bool hasDiamondRed = false;
@@ -70,11 +70,14 @@ public class GameManager : MonoBehaviour
 
         player = GameObject.Find("Player");
         score = 0;
+
+        // If Continue is pressed in IntroScene
         if (continueGame) StateRecover();
         textScore.text = score.ToString();
         lifesNumber = maxLifesNumber;
-
         GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
+
+        // If Player uses Joystick
         if (UsingVJoystick())
         {
             controlsMobile.SetActive(true);
@@ -87,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        //STATUS
+        //SET STATUS
         if (GameStatusManager.Instance.GetLifesNumber() > 0)
         {
             GetDiamonsStatus();
@@ -96,26 +99,9 @@ public class GameManager : MonoBehaviour
             score = GameStatusManager.Instance.GetScore();
             textScore.text = score.ToString();
         }
-        //FIN DE STATUS
     }
 
-
-    private void Update()
-    {
-        // TODO PAUSE GAME
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (state == State.Playing)
-            {
-                PauseGame();
-            }
-            else if (state == State.Pause)
-            {
-                UnpauseGame();
-            }
-        }
-    }
-
+    // Increase one lifes of player
     public void AddLifes()
     {
         GameStatusManager.Instance.SetLifesNumber(lifesNumber);//STATUS DEL JUEGO
@@ -123,6 +109,7 @@ public class GameManager : MonoBehaviour
     }
     
     
+    // Delete lifes and evaluate if game over will be shown
     public void DeleteLife()
     {
         if (godMode) return;
@@ -141,6 +128,7 @@ public class GameManager : MonoBehaviour
     }
 
     
+    // Evaluates if any diamond has been taken
     private void GetDiamonsStatus()
     {
         hasDiamondBlue = GameStatusManager.Instance.GetHasDiamondBlue();
@@ -166,6 +154,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // If key has been taken, it will be shown in the game
     private void GetKeySatus()
     {
         hasKey = GameStatusManager.Instance.GetHasKey();
@@ -177,18 +166,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Load Intro Scene
     private void LoadIntroScene()
     {
         SceneManager.LoadScene("IntroScene");
     }
 
-    public void PauseGame()
-    {
-        state = State.Pause;
-        StopGame();
-        textPause.enabled = true;
-    }
-
+    // Setting score game
     public void Scoring(int points)
     {
         score += points;
@@ -197,6 +181,7 @@ public class GameManager : MonoBehaviour
         textScore.text = score.ToString();
     }
 
+    // Recovering state, evaluates if key and diamons has been taken, player position and score
     public void StateRecover()
     {
         continueGame = false;
@@ -210,6 +195,7 @@ public class GameManager : MonoBehaviour
     }
 
 
+    // Saving state
     public void StateSave()
     {
         //Guardamos la puntuacion, si tenemos llave o no.
@@ -222,14 +208,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void StopGame()
-    {
-        player = GameObject.Find("Player");
-        Time.timeScale = 0;
-        player.GetComponent<PlayerManager>().enabled = false;
-    }
-
-
+    // Evaluates if current key has been taken
     public void TakingKey()
     {
         hasKey = true;
@@ -237,6 +216,7 @@ public class GameManager : MonoBehaviour
         GetComponent<UIManager>().ActivateUIKey();
     }
 
+    // Evaluates if any diamond has been taken
     public void TakingDiamond(string diamondName)
     {
         switch (diamondName)
@@ -266,14 +246,7 @@ public class GameManager : MonoBehaviour
         GetComponent<UIManager>().ActivateUIDiamond(diamondName);
     }
 
-    private void UnpauseGame()
-    {
-        state = State.Playing;
-        Time.timeScale = 1;
-        player.GetComponent<PlayerManager>().enabled = true;
-        textPause.enabled = false;
-    }
-
+    // If using Joystick
     private bool UsingVJoystick()
     {
         bool mobilePlatform =

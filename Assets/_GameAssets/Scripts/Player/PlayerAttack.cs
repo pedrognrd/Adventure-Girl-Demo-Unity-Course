@@ -28,6 +28,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
+        // Controls for firing
         if (Input.GetKeyDown(KeyCode.X))
         {
             animator.SetBool("Shooting", true);
@@ -42,6 +43,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Fire()
     {
+        // Controlling the firing, intantiating the bullets and playing sounds
         if (canShoot)
         {
             float direction = spawnPoint.transform.parent.transform.localScale.x;

@@ -17,6 +17,7 @@ public class Exit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // If player collides with exit and key has been taken
         if (collision.CompareTag("Player"))
         {
             if (gameManager.hasKey)

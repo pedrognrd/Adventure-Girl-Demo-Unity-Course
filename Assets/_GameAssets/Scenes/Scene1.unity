@@ -718,7 +718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40947757974860269, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_Name
-      value: PlatformSunken (5)
+      value: PlatformSunken
       objectReference: {fileID: 0}
     - target: {fileID: 3196922705984760388, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -947,7 +947,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40947757974860269, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_Name
-      value: PlatformSunken (4)
+      value: PlatformSunken
       objectReference: {fileID: 0}
     - target: {fileID: 3196922705984760388, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2559,7 +2559,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40947757974860269, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_Name
-      value: PlatformSunken (1)
+      value: PlatformSunken
       objectReference: {fileID: 0}
     - target: {fileID: 3196922705984760388, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4039,17 +4039,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3298065310717581553, guid: 7ae86ebb519eee145a843740597dab1e, type: 3}
   m_PrefabInstance: {fileID: 1135051161}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1171812899 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1171812899, guid: b2eded31096981b4797dfa7159a45228, type: 3}
-  m_PrefabInstance: {fileID: 2239694791623765757}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1173512852
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4233,7 +4222,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40947757974860269, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_Name
-      value: PlatformSunken (2)
+      value: PlatformSunken
       objectReference: {fileID: 0}
     - target: {fileID: 3196922705984760388, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4833,7 +4822,7 @@ BuoyancyEffector2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_SurfaceLevel: -4.4
-  m_Density: 0.5
+  m_Density: 0.2
   m_LinearDrag: 5
   m_AngularDrag: 5
   m_FlowAngle: 0
@@ -12543,7 +12532,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 25.5, y: -9.97676}
+  m_Offset: {x: 25.5, y: -8.975646}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -12554,7 +12543,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 93, y: 6.0519485}
+  m_Size: {x: 93, y: 8.054176}
   m_EdgeRadius: 0
 --- !u!1001 &1492821467
 PrefabInstance:
@@ -13163,7 +13152,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 40947757974860269, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_Name
-      value: PlatformSunken (3)
+      value: PlatformSunken
       objectReference: {fileID: 0}
     - target: {fileID: 3196922705984760388, guid: cc5abe5d3f3af344895855406e39889e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25753,7 +25742,7 @@ PrefabInstance:
     - target: {fileID: 5505011246497435042, guid: b529771e1e9f44245984fa9c5686fe87, type: 3}
       propertyPath: textPause
       value: 
-      objectReference: {fileID: 1171812899}
+      objectReference: {fileID: 0}
     - target: {fileID: 5505011246497435043, guid: b529771e1e9f44245984fa9c5686fe87, type: 3}
       propertyPath: m_LocalPosition.x
       value: 552.15955
@@ -25918,6 +25907,10 @@ PrefabInstance:
       propertyPath: audioWater
       value: 
       objectReference: {fileID: 8300000, guid: 624d89c15403bbc489b69f892553b9e3, type: 3}
+    - target: {fileID: 6294997508500493512, guid: eca89d8f8f56db84b9668d6a5b3c0b31, type: 3}
+      propertyPath: audioDead
+      value: 
+      objectReference: {fileID: 8300000, guid: d99f0f9f3970a124eb486aa70282fed0, type: 3}
     - target: {fileID: 6294997508500493516, guid: eca89d8f8f56db84b9668d6a5b3c0b31, type: 3}
       propertyPath: joystickPlayer
       value: 

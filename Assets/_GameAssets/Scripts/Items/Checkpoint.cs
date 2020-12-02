@@ -7,6 +7,7 @@ public class Checkpoint : MonoBehaviour
 {
     private void OnTriggerExit2D(Collider2D collision)
     {
+        // When player collides with a checkpoint, flag is open and game data saved
         if (collision.gameObject.CompareTag("Player"))
         {
             GetComponent<Animator>().SetBool("Checked", true);
