@@ -44,25 +44,62 @@ public class AttackNinjaBoy : MonoBehaviour
         xPlayer = player.transform.position.x;
         yPlayer = player.transform.position.y;
 
-        // Ninja Boy only attacks when Player is in line with him, but not if player is lower or higher.
-        if ((xEnemy - xPlayer) < attackDistance && (yEnemy - yPlayer) < 1)
+        if ((xPlayer - xEnemy) < 0)
         {
-            // Detects if player is left or right from Ninja Boy
-            DetectPayer();
-            GetComponentInParent<TwoPointsMove>().enabled = false;
-            animator.SetBool("Throwing", true);
-            Throw();
-        } if ((xEnemy - xPlayer) > attackDistance && (yEnemy - yPlayer) > 1)
-        {
-            GetComponentInParent<TwoPointsMove>().enabled = true;
-            animator.SetBool("Throwing", false);
+            if ((xPlayer - xEnemy) > -6)
+            {
+                if ((yPlayer - yEnemy) > 0 && (yPlayer - yEnemy) < 1)
+                {
+                    AttackOn();
+                }
+                if ((yPlayer - yEnemy) < 0 || (yPlayer - yEnemy) > 1)
+                {
+                    AttackOff();
+                }
+            }
+
+            if ((xPlayer - xEnemy) < -6)
+            {
+                AttackOff();
+            }
         }
 
-        if (gameObject.GetComponent<Enemy>().dying) {
-            animator.SetBool("Throwing", false);
+        if ((xPlayer - xEnemy) > 0)
+        {
+            if ((xPlayer - xEnemy) < 6)
+            {
+                if ((yPlayer - yEnemy) > 0 && (yPlayer - yEnemy) < 1)
+                {
+                    AttackOn();
+                }
+                if ((yPlayer - yEnemy) < 0 || (yPlayer - yEnemy) > 1)
+                {
+                    AttackOff();
+                }
+            }
+
+            if ((xPlayer - xEnemy) > 6)
+            {
+                AttackOff();
+            }
         }
     }
 
+    private void AttackOff()
+    {
+        GetComponentInParent<TwoPointsMove>().enabled = true;
+        animator.SetBool("Throwing", false);
+    }
+
+    private void AttackOn()
+    {
+        GetComponentInParent<TwoPointsMove>().enabled = false;
+        DetectPayer();
+        Throw();
+        animator.SetBool("Throwing", true);
+    }
+
+    // Detects if player is left or right from Ninja Boy
     private void DetectPayer() 
     {
         if (xEnemy - xPlayer > 0)
@@ -85,8 +122,6 @@ public class AttackNinjaBoy : MonoBehaviour
             canShoot = false;
             Invoke(nameof(RestoreThrow), 0.9f);
             audioSource.PlayOneShot(audioShoot);
-            // TODO
-            //GetComponentInParent<PlayerSoundManager>().PlayAudioFire();
         }
     }
 

@@ -3,10 +3,11 @@ https://opengameart.org/content/jump-and-run-8-bit
 Attribution instructions:  You must link back to http://opengameart.org in your credits.
 
 TODO
-- Keeping diamonds when loading new scene
-- When sunking in water, received damaged
-- Ninja Boy attacks constantly
+- When load new scene
+	- update hasKey = false
 
+- Soundtrack for each scene
+- When sunking in water, received damaged
 
 - Scene2
 	- New Enemies:
@@ -26,6 +27,12 @@ STOPPERS
 	- 1 CoinGoldLarge = 5 CoinGoldMedium
 
 DONE
+- When dying and press continue or when Load next scene
+	- Get diamons status and not showing in scene if any were
+	- Key is taken and is not in scene
+
+- Ninja Boy attacks constantly
+- Keeping diamonds when loading new scene
 - Change scene but mobile controls are on
 - When change scene and died, not start back to last cheking flag
 - EndGameScene

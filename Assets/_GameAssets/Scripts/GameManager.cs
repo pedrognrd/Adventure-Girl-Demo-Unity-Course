@@ -90,14 +90,15 @@ public class GameManager : MonoBehaviour
         //STATUS
         if (GameStatusManager.Instance.GetLifesNumber() > 0)
         {
+            GetDiamonsStatus();
             lifesNumber = GameStatusManager.Instance.GetLifesNumber();
             GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
             score = GameStatusManager.Instance.GetScore();
             textScore.text = score.ToString();
         }
         //FIN DE STATUS
-
     }
+
 
     private void Update()
     {
@@ -115,6 +116,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AddLifes()
+    {
+        GameStatusManager.Instance.SetLifesNumber(lifesNumber);//STATUS DEL JUEGO
+        GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
+    }
+    
+    
     public void DeleteLife()
     {
         if (godMode) return;
@@ -132,10 +140,41 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void AddLifes()
+    
+    private void GetDiamonsStatus()
     {
-        GameStatusManager.Instance.SetLifesNumber(lifesNumber);//STATUS DEL JUEGO
-        GetComponent<UIManager>().PaintLifesUI(lifesNumber, prefabImageLife, panelLifes);
+        hasDiamondBlue = GameStatusManager.Instance.GetHasDiamondBlue();
+        hasDiamondGreen = GameStatusManager.Instance.GetHasDiamondGreen();
+        hasDiamondRed = GameStatusManager.Instance.GetHasDiamondRed();
+        hasDiamondYellow = GameStatusManager.Instance.GetHasDiamondYellow();
+
+        if (hasDiamondBlue)
+        {
+            TakingDiamond("DiamondBlue");
+        }
+        if (hasDiamondGreen)
+        {
+            TakingDiamond("DiamondGreen");
+        }
+        if (hasDiamondRed)
+        {
+            TakingDiamond("DiamondRed");
+        }
+        if (hasDiamondYellow)
+        {
+            TakingDiamond("DiamondYellow");
+        }
+    }
+
+    private void GetKeySatus()
+    {
+        hasKey = GameStatusManager.Instance.GetHasKey();
+        if (hasKey)
+        {
+            GameStatusManager.Instance.SetHasKey(true);
+            GetComponent<UIManager>().ActivateUIKey();
+            Destroy(GameObject.Find("KeyGreen"));
+        }
     }
 
     private void LoadIntroScene()
@@ -164,13 +203,12 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("Score"))
         {
             score = PlayerPrefs.GetInt("Score");
-            if (PlayerPrefs.GetInt("HasKey") == 1)
-            {
-                TakingKey();
-            }
             player.transform.position = new Vector2(PlayerPrefs.GetFloat("x"), PlayerPrefs.GetFloat("y"));
         }
+        GetKeySatus();
+        GetDiamonsStatus();
     }
+
 
     public void StateSave()
     {
@@ -195,6 +233,7 @@ public class GameManager : MonoBehaviour
     public void TakingKey()
     {
         hasKey = true;
+        GameStatusManager.Instance.SetHasKey(true);
         GetComponent<UIManager>().ActivateUIKey();
     }
 
@@ -204,15 +243,23 @@ public class GameManager : MonoBehaviour
         {
             case "DiamondBlue" :
                 hasDiamondBlue = true;
+                GameStatusManager.Instance.SetHasDiamondBlue(true);
+                Destroy(GameObject.Find("DiamondBlue"));
                 break;
             case "DiamondGreen":
                 hasDiamondGreen = true;
+                GameStatusManager.Instance.SetHasDiamondGreen(true);
+                Destroy(GameObject.Find("DiamondGreen"));
                 break;
             case "DiamondRed":
                 hasDiamondRed = true;
+                GameStatusManager.Instance.SetHasDiamondRed(true);
+                Destroy(GameObject.Find("DiamondRed"));
                 break;
             case "DiamondYellow":
                 hasDiamondYellow = true;
+                GameStatusManager.Instance.SetHasDiamondYellow(true);
+                Destroy(GameObject.Find("DiamondYellow"));
                 break;
         }
 
@@ -229,9 +276,9 @@ public class GameManager : MonoBehaviour
 
     private bool UsingVJoystick()
     {
-        bool mobilePlatfomr =
+        bool mobilePlatform =
             ((Application.platform == RuntimePlatform.Android) || (Application.platform == RuntimePlatform.IPhonePlayer));
-        if (mobilePlatfomr)
+        if (mobilePlatform)
         {
             // When using mobile device
             useVJoystick = true;

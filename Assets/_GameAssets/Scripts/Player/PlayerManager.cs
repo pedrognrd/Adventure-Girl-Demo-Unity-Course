@@ -15,15 +15,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.P))
-        {
-            gameManager.PauseGame();
-        }
-
-        if (Input.GetKeyUp(KeyCode.P))
-        {
-            gameManager.PauseGame();
-        }*/
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

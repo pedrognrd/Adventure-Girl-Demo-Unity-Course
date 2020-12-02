@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private Image imageKey;
+    private Image keyGreen;
     private Image imageDiamondBlue;
     private Image imageDiamondGreen;
     private Image imageDiamondRed;
@@ -54,8 +55,6 @@ public class UIManager : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
-
-
     public void PaintLifesUI(int lifesNumber, GameObject prefabImageLife, GameObject panelLifes)
     {
         CleanPanelLives(panelLifes);

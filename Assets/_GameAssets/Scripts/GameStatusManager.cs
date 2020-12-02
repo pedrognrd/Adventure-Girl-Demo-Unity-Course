@@ -2,6 +2,16 @@
 
 public class GameStatusManager : MonoBehaviour
 {
+    [Header("INVENTORY")]
+    //Inventario
+    public bool hasDiamondBlue = false;
+    public bool hasDiamondGreen = false;
+    public bool hasDiamondRed = false;
+    public bool hasDiamondYellow = false;
+
+
+    public bool hasKey = false;
+
     [SerializeField]
     private int lifesNumber;
     [SerializeField]
@@ -23,6 +33,49 @@ public class GameStatusManager : MonoBehaviour
         }
     }
 
+    public bool GetHasDiamondBlue()
+    {
+        return hasDiamondBlue;
+    }
+    public void SetHasDiamondBlue(bool value)
+    {
+        hasDiamondBlue = value;
+    }
+
+    public bool GetHasDiamondGreen()
+    {
+        return hasDiamondGreen;
+    }
+    public void SetHasDiamondGreen(bool value)
+    {
+        hasDiamondGreen = value;
+    }
+    public bool GetHasDiamondRed()
+    {
+        return hasDiamondRed;
+    }
+    public void SetHasDiamondRed(bool value)
+    {
+        hasDiamondRed = value;
+    }
+    public void SetHasDiamondYellow(bool value)
+    {
+        hasDiamondYellow = value;
+    }
+
+    public bool GetHasKey()
+    {
+        return hasKey;
+    }
+    public void SetHasKey(bool value)
+    {
+        hasKey = value;
+    }
+    public bool GetHasDiamondYellow()
+    {
+        return hasDiamondYellow;
+    }
+
     public int GetLifesNumber()
     {
         return lifesNumber;
@@ -39,6 +92,4 @@ public class GameStatusManager : MonoBehaviour
     {
         score = value;
     }
-
-
 }
