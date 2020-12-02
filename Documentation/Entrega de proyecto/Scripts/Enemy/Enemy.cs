@@ -1,104 +1,54 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public abstract class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
-    [SerializeField]
-    protected float attackDistance;
-    protected bool autodestruccion = false;
-    [SerializeField]
-    protected int damageDone;
-    [SerializeField]
-    private AudioClip explosionSound;
-    [SerializeField]
-    protected float followingDistance;
-    private GameObject gameManager;
-    [SerializeField]
-    private int health;
-    [SerializeField]
-    private Slider healthSlider;
-    [SerializeField]
-    private AudioClip painSound;
-    [SerializeField]
-    protected GameObject player;
-    [SerializeField]
-    private int points;
-    [SerializeField]
-    private GameObject prefabBlood;
-    [SerializeField]
-    private GameObject prefabHit;
-    [SerializeField]
-    private GameObject prefabExplosion;
-    [SerializeField]
-    protected float speed;
-
-    // Start is called before the first frame update
-    protected void Awake()
+    Animator animator;
+    public bool dying = false;
+    private AudioSource audioSource;
+    
+    private void Awake()
     {
-        player = GameObject.Find("Player");
+        // Set animator component
+        animator = GetComponentInChildren<Animator>();
+        // Set audiosource component
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    protected virtual void Update()
+    private void Update()
     {
-        Move(); 
-        
-        float distance = DistanceToPlayer();
-        if (distance <= attackDistance)
+        // When dying, invoke method
+        if (dying)
         {
-            Attack();
+            Invoke(nameof(Dying), 0.6f);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // If collides with Player
+        if (collision.transform.CompareTag("Player"))
+        {
+            // If enemy is Ninja Boy, he stops attacking before dying
+            if (gameObject.layer == 11)
+            {
+                gameObject.GetComponent<AttackNinjaBoy>().canShoot = false;
+            }
+
+            // Player Jumps back
+            collision.gameObject.GetComponent<JumpBack>().JumpingBack();
+            // Inflicts damage to Player
+            collision.gameObject.GetComponent<PlayerManager>().DamageReceived();
+            // Enemy dies
+            dying = true;
+            animator.SetTrigger("Dying");
+            Invoke(nameof(Dying), 0.6f);
         }
     }
 
-    protected void Blooding(Vector3 bloodPosition)
+    // when Enemy dies
+    public void Dying()
     {
-        GameObject hit = Instantiate(prefabBlood, bloodPosition, transform.rotation);
+        Destroy(transform.parent.gameObject);
     }
-
-    public void DamageReceived(int danno)
-    {
-        GetComponent<AudioSource>().PlayOneShot(painSound);
-        health = health - danno;
-        healthSlider.value = healthSlider.maxValue - health;
-        if (health <= 0)
-        {
-            Dying(autodestruccion = true);
-        }
-    }
-    public void DamageReceived(int danno, Vector3 position)
-    {
-        health = health - danno;
-        healthSlider.value = healthSlider.maxValue - health;
-        if (health > 0)
-        {
-            Blooding(position);
-        }
-    }
-
-    protected float DistanceToPlayer()
-    {
-        Vector3 vDistance = player.transform.position - transform.position;
-        float distance = vDistance.magnitude;
-        return distance;
-    }
-
-    protected void Dying(bool autodestruccion)
-    {
-        GameObject explosion = Instantiate(prefabExplosion, transform.position, transform.rotation);
-        explosion.GetComponent<AudioSource>().clip = explosionSound;
-        explosion.GetComponent<AudioSource>().Play();
-        Destroy(gameObject);
-
-        if (autodestruccion)
-        {
-            gameManager = GameObject.Find("GameManager");
-            gameManager.GetComponent<GameManager>().UpdateScore(points);
-        }
-    }
-
-    // Abstract methods
-    public abstract void Attack();
-    public abstract void Move();
 }

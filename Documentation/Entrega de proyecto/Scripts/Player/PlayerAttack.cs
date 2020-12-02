@@ -43,42 +43,21 @@ public class PlayerAttack : MonoBehaviour
 
     public void Fire()
     {
-        if (canShoot)
-        {
-            CanShoot();
-        }
-    }
-
-    // Fire if player is playing with joystick and buttons
-    public void FireButton()
-    {
-        animator.SetBool("Shooting", true);
-        if (canShoot)
-        {
-            CanShoot();
-        }
-        Invoke(nameof(StopShooting), 0.2f);
-    }
-
-    private void CanShoot()
-    {
         // Controlling the firing, intantiating the bullets and playing sounds
-        float direction = spawnPoint.transform.parent.transform.localScale.x;
-        GameObject projectile = Instantiate(prefabProjectile, spawnPoint.position, spawnPoint.rotation);
-        projectile.GetComponent<Rigidbody2D>().AddForce(new Vector2(horizontalForce * direction, verticalForce));
-        canShoot = false;
-        Invoke(nameof(RestoreFire), 0);
-        psm.PlayAudioShoot();
+        if (canShoot)
+        {
+            float direction = spawnPoint.transform.parent.transform.localScale.x;
+            GameObject projectile = Instantiate(prefabProjectile, spawnPoint.position, spawnPoint.rotation);
+            projectile.GetComponent<Rigidbody2D>().AddForce(new Vector2(horizontalForce * direction, verticalForce));
+            canShoot = false;
+            Invoke(nameof(RestoreFire), 0);
+            //GetComponentInParent<PlayerSoundManager>().PlayAudioFire();
+            psm.PlayAudioShoot();
+        }
     }
 
     void RestoreFire()
     {
         canShoot = true;
-    }
-
-    // Stop fire animation if player is playing with joystick and buttons
-    void StopShooting()
-    {
-        animator.SetBool("Shooting", false);
     }
 }

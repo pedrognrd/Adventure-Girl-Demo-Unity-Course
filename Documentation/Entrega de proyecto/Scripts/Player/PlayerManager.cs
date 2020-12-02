@@ -1,205 +1,66 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
-using UnityStandardAssets.Characters.FirstPerson;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField]
-    private string playerName;
-    [SerializeField]
-    private int activeIconWeapon = 0;
-    [SerializeField]
-    private int activeWeapon = 0;
-    [SerializeField]
-    private GameObject door;
-    [SerializeField]
-    private GameObject doorInside;
-    private GameObject gameMenu;
-    [SerializeField]
-    private int health;
-    [SerializeField]
-    GameObject healthBar;
-    [SerializeField]
-    private GameObject[] IconWeapons;    
-    [SerializeField]
-    private int maxHealth;
-    [SerializeField]
-    private AudioClip openTheDoor;
-    [SerializeField]
-    GameObject endPanel;
-    [SerializeField]
-    GameObject panelMenu;
-    [SerializeField]
-    public int score;
-    [SerializeField]
-    private bool shield;     
-    [SerializeField]
-    public Text textChargers;
-    [SerializeField]
-    private GameObject[] weapons;
-    private static PlayerManager _instance;
-
+    private GameManager gameManager;
+    public string diamondName;
+    private PlayerSoundManager psm;
     private void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
-        health = maxHealth;
-        //doorInside = GameObject.Find("DoorInsideCollider");
-        //doorInside.SetActive(false);
-        ActivateWeapon(activeWeapon);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        psm = GetComponent<PlayerSoundManager>();
     }
-
-    private void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        ChooseWeapon();
-        Shoot();
-        Recharge();
-        door = GameObject.Find("Door");
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Charger"))
+        // Controlling when player collides against collectible items 
+        if (collision.gameObject.CompareTag("Diamond"))
         {
-            int nc = other.gameObject.GetComponentInParent<GenericCharger>().numberChargers;
-            weapons[activeWeapon].GetComponent<Weapon>().AddChargers(nc);
-            Destroy(other.gameObject);
-            GameObject.Find("SuitcaseCharger").GetComponent<GenericCharger>().PlayChargerTaken();
+            diamondName = collision.gameObject.name;
+            psm.PlayAudioDiamond();
+            GameObject.Find("GameManager").GetComponent<GameManager>().TakingDiamond(diamondName);
+            Destroy(collision.gameObject);
         }
 
-        if (other.gameObject.CompareTag("Key"))
+        if (collision.gameObject.CompareTag("Key"))
         {
-            Destroy(other.gameObject);
-            GameObject.Find("ImageKey").GetComponent<Image>().color = Color.yellow;
-            GameManager.hasKey = true;
-            GameObject.Find("Door").GetComponent<Animator>().enabled = true;
-            door.GetComponent<AudioSource>().PlayOneShot(openTheDoor);
-            doorInside.SetActive(true);
-            GameObject.Find("Key").GetComponent<Key>().PlayKeyTaken();
+            psm.PlayAudioKey();
+            GameObject.Find("GameManager").GetComponent<GameManager>().TakingKey();
+            Destroy(collision.gameObject);
         }
-        if (other.gameObject.CompareTag("Necronomicon"))
+
+        if (collision.gameObject.CompareTag("Life"))
         {
-            endPanel.SetActive(true);
-            GameManager.hasNecronomicon = true;
+            psm.PlayAudioLife();
+            GameObject.Find("GameManager").GetComponent<GameManager>().lifesNumber++;
+            GameObject.Find("GameManager").GetComponent<GameManager>().AddLifes();
+            Destroy(collision.gameObject);
         }
-    }
 
-    public void ActivateWeapon(int idArma)
-    {
-        for (int i = 0; i < weapons.Length; i++)
+        if (collision.gameObject.CompareTag("Star"))
         {
-            if (i == idArma)
-            {
-                weapons[i].SetActive(true);
-                IconWeapons[i].SetActive(true);
-                activeWeapon = i;
-                activeIconWeapon = i;
+            psm.PlayAudioStar();
+            GetComponent<GodMode>().GodModeOnByStar(20);
+            Destroy(collision.gameObject);
+        }
 
-                int chargers = weapons[i].GetComponent<Weapon>().chargers;
-                int bullets = weapons[i].GetComponent<Weapon>().ammo;
-
-                textChargers.text = "x" + chargers.ToString();
-                //TextAmmo.text = bullets.ToString();
-            }
-            else
-            {
-                weapons[i].SetActive(false);
-                IconWeapons[i].SetActive(false);
-            }
+        // Controlling when player collides against water in Scene1 or graveyard in Scene2
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            psm.PlayAudioWater();
+            DamageReceived();
         }
     }
 
-    public void ChooseWeapon() {
-        for (int i = 0; i <= weapons.Length; i++)
+    public void DamageReceived()
+    {
+        // If player is not in god mode, is damaged
+        if (!gameManager.godMode)
         {
-            if (Input.GetKeyDown(i.ToString()))
-            {
-                ActivateWeapon(i - 1);
-            }
+            GameObject.Find("GameManager").GetComponent<GameManager>().DeleteLife();
+            psm.PlayAudioDamage();
+            GetComponent<GodMode>().GodModeOn();
         }
     }
-
-    public void DamageReceived(int danno)
-    {
-        health = health - danno;
-        UpdateHealthBarAndBloodCanvas();
-        if (health <= 0) { Dying(); }
-    }
-
-    public void Dying()
-    {
-        panelMenu.SetActive(true);
-        GameObject.Find("GameManager").GetComponent<GameManager>().DoGameOver();
-    }
-
-    public bool HealthAtMax()
-    {
-        if (health >= maxHealth)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public bool HealthAtMin()
-    {
-        if (health >= 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    public void HealthRecovery(int incHealth)
-    {
-        health += incHealth;
-        // Con esto controlamos que la salud no crezca por encima de maxHealth
-        health = Mathf.Min(health, maxHealth);
-        UpdateHealthBarAndBloodCanvas();
-    }
-
-    public void HealthReduction(int decHealth)
-    {
-        health -= decHealth;
-        UpdateHealthBarAndBloodCanvas();
-        if (health <= 0) { Dying(); }
-    }
-
-    public void Recharge()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            weapons[activeWeapon].GetComponent<Weapon>().Reload();
-        }
-    }
-    
-    public void Shoot()
-    {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            weapons[activeWeapon].GetComponent<Weapon>().TryShoot();
-        }
-    }
-
-    
-    private void UpdateHealthBarAndBloodCanvas()
-    {
-        healthBar.GetComponent<Image>().fillAmount = health / ((float)maxHealth);
-    }   
 }

@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
         textGameOver.SetActive(false);
 
         textGamePause = GameObject.Find("TextGamePause");
-        textGamePause.SetActive(false);
         controlsMobile = GameObject.Find("ControlsMobile");
 
         player = GameObject.Find("Player");
