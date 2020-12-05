@@ -23,7 +23,7 @@ Como parte de las acciones formativas del Servicio Público de Empleo Estatal (S
 
 Adventure Girl is a 2D platform game, it is part of the projects carried out in the DEVELOPMENT OF VIDEO GAMES AND VIRTUAL REALITY WITH UNITY 3D (IFCD28) course.
 
-Project made with free assets from:
+Project developed with free assets from:
 Assets Store: https://assetstore.unity.com/
 Gameart2D: https://www.gameart2d.com/freebies.html
 
